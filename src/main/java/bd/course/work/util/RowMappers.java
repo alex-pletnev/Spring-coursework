@@ -119,7 +119,7 @@ public class RowMappers {
             notification.setNotificationId(rs.getLong("notification_id"));
             notification.setUserId(rs.getLong("user_id"));
             notification.setMessage(rs.getString("message"));
-            notification.setCreatedAt(rs.getTimestamp("created_at").toLocalDateTime());
+            notification.setCreatedAt(rs.getTimestamp("created_at"));
             notification.setRead(rs.getBoolean("read"));
             return notification;
         };
