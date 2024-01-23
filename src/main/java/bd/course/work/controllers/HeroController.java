@@ -1,5 +1,6 @@
 package bd.course.work.controllers;
 
+import bd.course.work.dto.HeroDTO;
 import bd.course.work.entities.Hero;
 import bd.course.work.services.HeroService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +19,10 @@ public class HeroController {
     }
 
     @PostMapping
-    public ResponseEntity<Hero> createHero(@RequestBody Hero hero) {
-        Hero createdHero = heroService.createHero(hero);
-        return ResponseEntity.ok(createdHero);
+    public ResponseEntity<Hero> createHero(@RequestBody HeroDTO heroDTO) {
+        return heroService.createHero(heroDTO)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{userId}")

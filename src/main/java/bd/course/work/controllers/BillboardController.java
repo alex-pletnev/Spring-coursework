@@ -1,6 +1,6 @@
 package bd.course.work.controllers;
 
-import bd.course.work.DTO.BillboardDTO;
+import bd.course.work.dto.BillboardDTO;
 import bd.course.work.entities.Hero;
 import bd.course.work.services.BillboardService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,8 +1,10 @@
 package bd.course.work.services;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
+import bd.course.work.dto.UserDTO;
 import bd.course.work.entities.User;
 import bd.course.work.repositories.UserRepository;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,25 +13,28 @@ import java.util.Optional;
 @Service
 public class UserService {
     private final UserRepository userRepository;
-    private final BCryptPasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
+    @Autowired
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
     }
 
     @Transactional
-    public User createUser(User user) {
-        if (userRepository.existsByUsername(user.getUserName()) || userRepository.existsByEmail(user.getEmail())) {
+    public User createUser(UserDTO userDTO) {
+        User user = new User();
+        user.setUsername(userDTO.username());
+        user.setPassword(userDTO.password());
+        user.setEmail(user.getEmail());
+        if (userRepository.existsByUsername(user.getUsername()) || userRepository.existsByEmail(user.getEmail())) {
             throw new IllegalArgumentException("Username or email already exists");
         }
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setPassword(BCrypt.withDefaults().hashToString(12, user.getPassword().toCharArray()));
         return userRepository.save(user);
     }
 
     public Optional<User> authenticateUser(String username, String password) {
         Optional<User> user = userRepository.findByUsername(username);
-        if (user.isPresent() && passwordEncoder.matches(password, user.get().getPassword())) {
+        if (user.isPresent() && BCrypt.verifyer().verify(password.toCharArray(), userRepository.findByUsername(username).orElseThrow().getPassword().toCharArray()).verified) {
             return user;
         }
         return Optional.empty();

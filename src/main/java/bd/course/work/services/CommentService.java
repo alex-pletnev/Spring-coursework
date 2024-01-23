@@ -1,5 +1,6 @@
 package bd.course.work.services;
 
+import bd.course.work.dto.CommentDTO;
 import bd.course.work.entities.Comment;
 import bd.course.work.repositories.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CommentService {
@@ -23,8 +25,7 @@ public class CommentService {
     }
 
     @Transactional
-    public Comment addComment(Comment comment) {
-        commentRepository.addComment(comment);
-        return comment;
+    public Optional<Comment> addComment(CommentDTO commentDTO) {
+        return commentRepository.addComment(commentDTO);
     }
 }

@@ -1,6 +1,6 @@
 package bd.course.work.services;
 
-import bd.course.work.DTO.BillboardDTO;
+import bd.course.work.dto.BillboardDTO;
 import bd.course.work.entities.Billboard;
 import bd.course.work.entities.Hero;
 import bd.course.work.repositories.BillboardRepository;

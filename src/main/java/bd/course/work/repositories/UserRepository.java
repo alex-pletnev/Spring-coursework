@@ -43,14 +43,16 @@ public class UserRepository {
     }
 
     public User save(User user) {
-        String sql = "INSERT INTO \"User\" (user_name, password, email) VALUES (?, ?, ?)";
-        jdbcTemplate.update(sql, user.getUserName(), user.getPassword(), user.getEmail());
-        return user; // Возвращаем объект пользователя
+        String sqlInsert = "INSERT INTO \"User\" (user_name, password, email) VALUES (?, ?, ?)";
+        jdbcTemplate.update(sqlInsert, user.getUsername(), user.getPassword(), user.getEmail());
+
+        String sqlSelect = "SELECT * FROM \"User\" WHERE user_name = ? AND email = ?";
+        return jdbcTemplate.queryForObject(sqlSelect, new Object[]{user.getUsername(), user.getEmail()}, RowMappers.getUserRowMapper());
     }
 
     public void createUser(User user) {
         String sql = "INSERT INTO \"User\" (user_name, password, email) VALUES (?, ?, ?)";
-        jdbcTemplate.update(sql, user.getUserName(), user.getPassword(), user.getEmail());
+        jdbcTemplate.update(sql, user.getUsername(), user.getPassword(), user.getEmail());
     }
 
     public User readUser(Long userId) {
@@ -60,7 +62,7 @@ public class UserRepository {
 
     public void updateUser(User user) {
         String sql = "UPDATE \"User\" SET user_name = ?, password = ?, email = ? WHERE user_id = ?";
-        jdbcTemplate.update(sql, user.getUserName(), user.getPassword(), user.getEmail(), user.getUserId());
+        jdbcTemplate.update(sql, user.getUsername(), user.getPassword(), user.getEmail(), user.getUserId());
     }
 
     public void deleteUser(Long userId) {

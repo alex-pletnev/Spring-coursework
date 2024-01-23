@@ -14,7 +14,7 @@ public class RowMappers {
         return (rs, rowNum) -> {
             User user = new User();
             user.setUserId(rs.getLong("user_id"));
-            user.setUserName(rs.getString("user_name"));
+            user.setUsername(rs.getString("user_name"));
             user.setPassword(rs.getString("password"));
             user.setEmail(rs.getString("email"));
             return user;
@@ -43,6 +43,7 @@ public class RowMappers {
             hero.setUserId(rs.getLong("user_id"));
             hero.setHeroClassId(rs.getLong("class_id"));
             hero.setXp(rs.getInt("xp"));
+            hero.setCurrentHp(rs.getInt("current_hp"));
             return hero;
         };
     }
@@ -88,6 +89,7 @@ public class RowMappers {
             Billboard billboard = new Billboard();
             billboard.setHeroId(rs.getLong("hero_id"));
             billboard.setQuestId(rs.getLong("quests_id"));
+            billboard.setResult(rs.getBoolean("result"));
             return billboard;
         };
     }

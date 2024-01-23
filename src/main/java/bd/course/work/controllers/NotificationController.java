@@ -1,5 +1,6 @@
 package bd.course.work.controllers;
 
+import bd.course.work.dto.NotificationDTO;
 import bd.course.work.entities.Notification;
 import bd.course.work.services.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +31,10 @@ public class NotificationController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Notification> addNotification(@RequestBody Notification notification) {
-        return ResponseEntity.ok(notificationService.addNotification(notification));
+    public ResponseEntity<Notification> addNotification(@RequestBody NotificationDTO notificationDTO) {
+        return notificationService.addNotification(notificationDTO)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
 

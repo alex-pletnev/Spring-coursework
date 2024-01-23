@@ -1,5 +1,6 @@
 package bd.course.work.services;
 
+import bd.course.work.dto.HeroDTO;
 import bd.course.work.entities.Hero;
 import bd.course.work.repositories.HeroRepository;
 import bd.course.work.repositories.LevelRepository;
@@ -22,9 +23,8 @@ public class HeroService {
     }
 
     @Transactional
-    public Hero createHero(Hero hero) {
-//        hero.setCurrentHp(levelRepository.findById(0L).orElseThrow().getHp());
-        return heroRepository.save(hero);
+    public Optional<Hero> createHero(HeroDTO heroDTO) {
+        return heroRepository.save(heroDTO);
     }
 
     @Transactional

@@ -1,5 +1,6 @@
 package bd.course.work.controllers;
 
+import bd.course.work.dto.CommentDTO;
 import bd.course.work.entities.Comment;
 import bd.course.work.services.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,9 @@ public class CommentController {
     }
 
     @PostMapping
-    public ResponseEntity<Comment> addComment(@RequestBody Comment comment) {
-        return ResponseEntity.ok(comment);
+    public ResponseEntity<Comment> addComment(@RequestBody CommentDTO commentDTO) {
+        return commentService.addComment(commentDTO)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 }

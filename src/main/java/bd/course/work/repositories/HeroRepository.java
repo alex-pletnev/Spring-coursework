@@ -1,11 +1,16 @@
 package bd.course.work.repositories;
 
+import bd.course.work.dto.HeroDTO;
 import bd.course.work.entities.Hero;
 import bd.course.work.util.RowMappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.util.Optional;
 
 @Repository
@@ -17,10 +22,28 @@ public class HeroRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public Hero save(Hero hero) {
-        String sql = "INSERT INTO Hero (name, age, current_hp, level_id, user_id, class_id, xp) VALUES (?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sql, hero.getName(), hero.getLevelId(), hero.getUserId(), hero.getHeroClassId(), hero.getXp());
-        return hero; // Возвращаем объект героя
+    public Optional<Hero> save(HeroDTO heroDTO) {
+        String sql = "INSERT INTO Hero (name, age, level_id, user_id, class_id, xp) VALUES (?, ?, ?, ?, ?, ?)";
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        jdbcTemplate.update(connection -> {
+            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, heroDTO.name());
+            ps.setInt(2, 0);
+            ps.setInt(3, 0);
+            ps.setInt(4, Math.toIntExact(heroDTO.userId()));
+            ps.setInt(5, Math.toIntExact(heroDTO.heroClassId()));
+            ps.setInt(6, 0);
+            return ps;
+        }, keyHolder);
+        Number key = keyHolder.getKey();
+        if (key != null) {
+            // Получение полной сущности из базы данных
+            return findById(key.longValue());
+        } else {
+            // Обработка ситуации, когда ключ не был сгенерирован
+            throw new RuntimeException("Failed to retrieve the generated key for the notification.");
+        }
+        // Возвращаем объект героя
     }
 
     public void deleteById(Long heroId) {
