@@ -35,10 +35,15 @@ public class HeroRepository {
             ps.setInt(6, 0);
             return ps;
         }, keyHolder);
-        Number key = keyHolder.getKey();
-        if (key != null) {
+        var keys = keyHolder.getKeys();
+        if (keys != null) {
             // Получение полной сущности из базы данных
-            return findById(key.longValue());
+            var pk = keys.get("hero_id");
+            if (pk instanceof Integer) {
+                return findById(((Integer) pk).longValue());
+            } else {
+                throw new RuntimeException("Failed to retrieve the generated key for the notification.");
+            }
         } else {
             // Обработка ситуации, когда ключ не был сгенерирован
             throw new RuntimeException("Failed to retrieve the generated key for the notification.");
