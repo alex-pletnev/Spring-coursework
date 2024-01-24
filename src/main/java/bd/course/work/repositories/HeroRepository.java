@@ -67,7 +67,7 @@ public class HeroRepository {
     }
 
     public Optional<Hero> findByUserId(Long userId) {
-        String sql = "SELECT * FROM Hero WHERE hero_id = ?";
+        String sql = "SELECT * FROM Hero WHERE user_id = ?";
         return Optional.ofNullable(jdbcTemplate.queryForObject(sql, new Object[]{userId}, RowMappers.getHeroRowMapper()));
     }
 

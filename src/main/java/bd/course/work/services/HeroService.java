@@ -42,6 +42,6 @@ public class HeroService {
     }
 
     public Optional<Hero> getHeroByUserId(Long userId) {
-        return heroRepository.findById(userId);
+        return heroRepository.findByUserId(userId);
     }
 }
