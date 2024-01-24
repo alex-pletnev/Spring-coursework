@@ -26,8 +26,8 @@ public class Hero {
         if (this.currentHp < 0) {
             this.currentHp = 0;
             levelId--;
-            if (levelId < 0) {
-                levelId = 0L;
+            if (levelId < 1) {
+                levelId = 1L;
             }
         }
     }

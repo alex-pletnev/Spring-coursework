@@ -29,7 +29,7 @@ public class HeroRepository {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, heroDTO.name());
             ps.setInt(2, 0);
-            ps.setInt(3, 0);
+            ps.setInt(3, 1);
             ps.setInt(4, Math.toIntExact(heroDTO.userId()));
             ps.setInt(5, Math.toIntExact(heroDTO.heroClassId()));
             ps.setInt(6, 0);
