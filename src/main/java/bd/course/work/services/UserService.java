@@ -24,7 +24,7 @@ public class UserService {
         User user = new User();
         user.setUsername(userDTO.username());
         user.setPassword(userDTO.password());
-        user.setEmail(user.getEmail());
+        user.setEmail(userDTO.email());
         if (userRepository.existsByUsername(user.getUsername()) || userRepository.existsByEmail(user.getEmail())) {
             throw new IllegalArgumentException("Username or email already exists");
         }
