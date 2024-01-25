@@ -38,7 +38,7 @@ public class HeroService {
 
     @Transactional
     public void deleteHeroByUserId(Long userId) {
-        heroRepository.deleteById(userId);
+        heroRepository.deleteByUserId(userId);
     }
 
     public Optional<Hero> getHeroByUserId(Long userId) {
