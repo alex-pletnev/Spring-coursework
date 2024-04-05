@@ -1,2 +1,2 @@
 # Простой REST API, для демотстрации работы бд
-Стек: Spring Boot, PostgreSQL, lombok
+Стек: Spring Boot, PostgreSQL, lombok etc.
