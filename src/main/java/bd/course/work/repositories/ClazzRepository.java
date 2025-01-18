@@ -1,10 +1,9 @@
 package bd.course.work.repositories;
 
-import bd.course.work.entities.Level;
+import bd.course.work.entities.Clazz;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-public interface LevelRepository extends JpaRepository<Level, Integer> {
+public interface ClazzRepository extends JpaRepository<Clazz, Long> {
 
 }
-

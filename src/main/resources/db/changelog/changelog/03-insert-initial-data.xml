@@ -1,0 +1,122 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="03-insert-initial-data" author="aleksandrpletnev">
+
+        <!-- Добавляем данные в таблицу Clazz -->
+        <insert tableName="clazz">
+            <column name="class_name" value="Warrior"/>
+            <column name="ability" value="Shield Block"/>
+        </insert>
+        <insert tableName="clazz">
+            <column name="class_name" value="Mage"/>
+            <column name="ability" value="Fireball"/>
+        </insert>
+        <insert tableName="clazz">
+            <column name="class_name" value="Rogue"/>
+            <column name="ability" value="Backstab"/>
+        </insert>
+        <insert tableName="clazz">
+            <column name="class_name" value="Cleric"/>
+            <column name="ability" value="Heal"/>
+        </insert>
+
+        <!-- Добавляем данные в таблицу Level -->
+        <insert tableName="level">
+            <column name="value" value="1"/>
+            <column name="xp_to_next_level" value="100"/>
+            <column name="max_hp" value="50"/>
+            <column name="damage" value="5"/>
+            <column name="mana" value="10"/>
+        </insert>
+        <insert tableName="level">
+            <column name="value" value="2"/>
+            <column name="xp_to_next_level" value="300"/>
+            <column name="max_hp" value="70"/>
+            <column name="damage" value="10"/>
+            <column name="mana" value="20"/>
+        </insert>
+        <insert tableName="level">
+            <column name="value" value="3"/>
+            <column name="xp_to_next_level" value="600"/>
+            <column name="max_hp" value="100"/>
+            <column name="damage" value="15"/>
+            <column name="mana" value="30"/>
+        </insert>
+
+        <!-- Добавляем данные в таблицу Type -->
+        <insert tableName="type">
+            <column name="description" value="Fetch Quest"/>
+            <column name="difficulty_factor" value="1.0"/>
+        </insert>
+        <insert tableName="type">
+            <column name="description" value="Kill Quest"/>
+            <column name="difficulty_factor" value="1.5"/>
+        </insert>
+        <insert tableName="type">
+            <column name="description" value="Escort Quest"/>
+            <column name="difficulty_factor" value="2.0"/>
+        </insert>
+        <insert tableName="type">
+            <column name="description" value="Raid Boss Quest"/>
+            <column name="difficulty_factor" value="3.5"/>
+        </insert>
+
+        <!-- Добавляем данные в таблицу Priority -->
+        <insert tableName="priority">
+            <column name="priority" value="1.0"/>
+            <column name="name" value="Low"/>
+        </insert>
+        <insert tableName="priority">
+            <column name="priority" value="2.0"/>
+            <column name="name" value="Medium"/>
+        </insert>
+        <insert tableName="priority">
+            <column name="priority" value="3.0"/>
+            <column name="name" value="High"/>
+        </insert>
+        <insert tableName="priority">
+            <column name="priority" value="4.0"/>
+            <column name="name" value="Critical"/>
+        </insert>
+
+        <!-- Добавляем данные в таблицу Quest -->
+        <insert tableName="quest">
+            <column name="title" value="Gather Healing Herbs"/>
+            <column name="description" value="The village healer needs rare herbs from the forest."/>
+            <column name="due_date" value="2025-01-30T23:59:59"/>
+            <column name="status" value="NOT_STARTED"/>
+            <column name="xp" value="50"/>
+            <column name="damage_to_hero" value="0"/>
+            <column name="min_hero_level_id" value="1"/>
+            <column name="priority_id" value="1"/>
+            <column name="type_id" value="1"/>
+        </insert>
+        <insert tableName="quest">
+            <column name="title" value="Defeat the Bandit Leader"/>
+            <column name="description"
+                    value="A group of bandits has been terrorizing the village. Their leader must be dealt with."/>
+            <column name="due_date" value="2025-02-10T23:59:59"/>
+            <column name="status" value="NOT_STARTED"/>
+            <column name="xp" value="150"/>
+            <column name="damage_to_hero" value="10"/>
+            <column name="min_hero_level_id" value="2"/>
+            <column name="priority_id" value="3"/>
+            <column name="type_id" value="2"/>
+        </insert>
+        <insert tableName="quest">
+            <column name="title" value="Escort the Merchant Caravan"/>
+            <column name="description"
+                    value="A caravan carrying valuable goods needs protection on its journey to the city."/>
+            <column name="due_date" value="2025-03-01T23:59:59"/>
+            <column name="status" value="NOT_STARTED"/>
+            <column name="xp" value="200"/>
+            <column name="damage_to_hero" value="15"/>
+            <column name="min_hero_level_id" value="3"/>
+            <column name="priority_id" value="4"/>
+            <column name="type_id" value="3"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

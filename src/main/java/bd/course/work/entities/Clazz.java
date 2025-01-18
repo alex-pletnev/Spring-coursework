@@ -3,22 +3,14 @@ package bd.course.work.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.sql.Timestamp;
-
 @Data
 @Entity
-public class Billboard {
+public class Clazz {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    private Hero hero;
+    private String className;
 
-    @ManyToOne
-    private Quest quest;
-
-    private boolean result;
-
-    private Timestamp at;
+    private String ability;
 }

@@ -1,14 +1,24 @@
 package bd.course.work.entities;
 
+import jakarta.persistence.*;
 import lombok.Data;
 
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 
 @Data
+@Entity
 public class Comment {
-    private Long commentId;
-    private Long questId;
-    private Long userId;
-    private String commentText;
-    private LocalDateTime timestamp;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne
+    private Quest quest;
+
+    @ManyToOne
+    private User user;
+
+    private String content;
+
+    private Timestamp at;
 }

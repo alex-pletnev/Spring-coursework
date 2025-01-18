@@ -1,36 +1,29 @@
 package bd.course.work.entities;
 
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
+@Entity
 public class Hero {
-    private Long heroId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String name;
+
     private int age;
+
     private int currentHp;
-    private Long levelId;
-    private Long userId;
-    private Long heroClassId;
+
+    @ManyToOne
+    private Level level;
+
+    @ManyToOne
+    private User user;
+
+    @ManyToOne
+    private Clazz clazz;
+
     private int xp;
-
-    public void setXp(int xp) {
-        this.xp = xp;
-        if (this.xp >= levelId * 100) {
-            this.xp -= (int) (levelId * 100);
-            levelId++;
-        }
-    }
-
-    public void setCurrentHp(int currentHp) {
-        this.currentHp = currentHp;
-        if (this.currentHp < 0) {
-            this.currentHp = 0;
-            levelId--;
-            if (levelId < 1) {
-                levelId = 1L;
-            }
-        }
-    }
-
-
 }

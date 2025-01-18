@@ -1,14 +1,23 @@
 package bd.course.work.entities;
 
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.sql.Timestamp;
 
 @Data
+@Entity
 public class Notification {
-    private Long notificationId;
-    private Long userId;
-    private String message;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne
+    private User user;
+
+    private String content;
+
     private Timestamp createdAt;
-    private boolean read;
+
+    private boolean isRead;
 }

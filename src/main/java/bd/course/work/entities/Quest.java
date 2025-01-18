@@ -1,19 +1,37 @@
 package bd.course.work.entities;
 
+import bd.course.work.entities.enums.QuestStatus;
+import jakarta.persistence.*;
 import lombok.Data;
 
-import java.time.LocalDate;
+import java.sql.Timestamp;
 
 @Data
+@Entity
 public class Quest {
-    private Long questId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String title;
+
     private String description;
-    private LocalDate dueDate;
-    private String status;
+
+    private Timestamp dueDate;
+
+    @Enumerated(EnumType.STRING)
+    private QuestStatus status;
+
     private int xp;
-    private Long minHeroLevelId;
+
+    @ManyToOne
+    private Level minHeroLevel;
+
     private int damageToHero;
-    private Long priorityId;
-    private Long typeId;
+
+    @ManyToOne
+    private Priority priority;
+
+    @ManyToOne
+    private Type type;
 }

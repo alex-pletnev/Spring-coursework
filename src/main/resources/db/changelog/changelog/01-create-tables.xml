@@ -1,0 +1,121 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="01-create-tables" author="aleksandrpletnev">
+        <createTable tableName="user">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="username" type="VARCHAR(255)"/>
+            <column name="password" type="VARCHAR(255)"/>
+            <column name="email" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="clazz">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="class_name" type="VARCHAR(255)"/>
+            <column name="ability" type="VARCHAR(255)"/>
+        </createTable>
+
+        <createTable tableName="level">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="value" type="BIGINT">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="xp_to_next_level" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="max_hp" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="damage" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="mana" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="priority">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="priority" type="DOUBLE"/>
+            <column name="name" type="VARCHAR(255)"/>
+        </createTable>
+
+        <createTable tableName="type">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="difficulty_factor" type="DOUBLE"/>
+        </createTable>
+
+        <createTable tableName="quest">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="title" type="VARCHAR(255)"/>
+            <column name="description" type="TEXT"/>
+            <column name="due_date" type="TIMESTAMP"/>
+            <column name="status" type="VARCHAR(50)"/>
+            <column name="xp" type="INT"/>
+            <column name="damage_to_hero" type="INT"/>
+            <column name="min_hero_level_id" type="BIGINT"/>
+            <column name="priority_id" type="BIGINT"/>
+            <column name="type_id" type="BIGINT"/>
+        </createTable>
+
+        <createTable tableName="hero">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="age" type="INT"/>
+            <column name="current_hp" type="INT"/>
+            <column name="level_id" type="BIGINT"/>
+            <column name="user_id" type="BIGINT"/>
+            <column name="clazz_id" type="BIGINT"/>
+            <column name="xp" type="INT"/>
+        </createTable>
+
+        <createTable tableName="billboard">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="hero_id" type="BIGINT"/>
+            <column name="quest_id" type="BIGINT"/>
+            <column name="result" type="BOOLEAN"/>
+            <column name="at" type="TIMESTAMP"/>
+        </createTable>
+
+        <createTable tableName="notification">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT"/>
+            <column name="content" type="TEXT"/>
+            <column name="created_at" type="TIMESTAMP"/>
+            <column name="is_read" type="BOOLEAN"/>
+        </createTable>
+
+        <createTable tableName="comment">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="quest_id" type="BIGINT"/>
+            <column name="user_id" type="BIGINT"/>
+            <column name="content" type="TEXT"/>
+            <column name="at" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

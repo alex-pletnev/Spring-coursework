@@ -1,0 +1,51 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="02-create-foreign-keys" author="aleksandrpletnev">
+        <addForeignKeyConstraint constraintName="fk_quest_min_hero_level"
+                                 baseTableName="quest" baseColumnNames="min_hero_level_id"
+                                 referencedTableName="level" referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint constraintName="fk_quest_priority"
+                                 baseTableName="quest" baseColumnNames="priority_id"
+                                 referencedTableName="priority" referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint constraintName="fk_quest_type"
+                                 baseTableName="quest" baseColumnNames="type_id"
+                                 referencedTableName="type" referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint constraintName="fk_hero_level"
+                                 baseTableName="hero" baseColumnNames="level_id"
+                                 referencedTableName="level" referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint constraintName="fk_hero_user"
+                                 baseTableName="hero" baseColumnNames="user_id"
+                                 referencedTableName="user" referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint constraintName="fk_hero_clazz"
+                                 baseTableName="hero" baseColumnNames="clazz_id"
+                                 referencedTableName="clazz" referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint constraintName="fk_billboard_hero"
+                                 baseTableName="billboard" baseColumnNames="hero_id"
+                                 referencedTableName="hero" referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint constraintName="fk_billboard_quest"
+                                 baseTableName="billboard" baseColumnNames="quest_id"
+                                 referencedTableName="quest" referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint constraintName="fk_notification_user"
+                                 baseTableName="notification" baseColumnNames="user_id"
+                                 referencedTableName="user" referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint constraintName="fk_comment_quest"
+                                 baseTableName="comment" baseColumnNames="quest_id"
+                                 referencedTableName="quest" referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint constraintName="fk_comment_user"
+                                 baseTableName="comment" baseColumnNames="user_id"
+                                 referencedTableName="user" referencedColumnNames="id"/>
+    </changeSet>
+</databaseChangeLog>

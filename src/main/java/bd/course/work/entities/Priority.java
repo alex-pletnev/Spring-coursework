@@ -1,10 +1,16 @@
 package bd.course.work.entities;
 
+import jakarta.persistence.*;
 import lombok.Data;
 
-
 @Data
+@Entity
 public class Priority {
-    private Long priorityId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private Double priority;
+
     private String name;
 }
