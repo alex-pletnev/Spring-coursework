@@ -8,6 +8,12 @@ import lombok.Data;
 
 @Data
 public class PriorityInputDTO {
+    /**
+     * Identifier of the type.
+     * Usually null when creating a new record.
+     */
+    private Long id;
+
     @NotNull(message = "Priority value is mandatory")
     @Positive(message = "Priority value must be positive")
     private Double priority;

@@ -6,6 +6,12 @@ import lombok.Data;
 
 @Data
 public class ClazzInputDTO {
+    /**
+     * Identifier of the type.
+     * Usually null when creating a new record.
+     */
+    private Long id;
+
     @NotBlank(message = "Class name is mandatory")
     @Size(max = 100, message = "Class name cannot exceed 100 characters")
     private String className;

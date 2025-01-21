@@ -2,6 +2,7 @@ package bd.course.work.advice;
 
 import bd.course.work.dto.error.ErrorResponseDTO;
 import bd.course.work.exceptions.ConflictException;
+import bd.course.work.exceptions.InvalidPasswordException;
 import bd.course.work.exceptions.InvalidRequestException;
 import bd.course.work.exceptions.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -60,6 +61,28 @@ public class GlobalExceptionHandler {
                 errors
         );
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+    }
+
+    // Обработка InvalidPasswordException
+    @ExceptionHandler(InvalidPasswordException.class)
+    public ResponseEntity<ErrorResponseDTO> handleInvalidPassword(InvalidPasswordException ex) {
+        ErrorResponseDTO errorResponse = new ErrorResponseDTO(
+                ex.getMessage(),
+                "INVALID_PASSWORD",
+                "The provided password is incorrect."
+        );
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorResponse);
+    }
+
+    // Обработка IllegalStateException
+    @ExceptionHandler(IllegalStateException.class)
+    public ResponseEntity<ErrorResponseDTO> handleIllegalState(IllegalStateException ex) {
+        ErrorResponseDTO errorResponse = new ErrorResponseDTO(
+                ex.getMessage(),
+                "ILLEGAL_STATE",
+                "An illegal state occurred during the process."
+        );
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
     }
 
     // Обработка всех остальных исключений

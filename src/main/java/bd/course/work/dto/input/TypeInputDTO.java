@@ -8,6 +8,12 @@ import lombok.Data;
 
 @Data
 public class TypeInputDTO {
+    /**
+     * Identifier of the type.
+     * Usually null when creating a new record.
+     */
+    private Long id;
+
     @NotBlank(message = "Type description is mandatory")
     @Size(max = 255, message = "Type description cannot exceed 255 characters")
     private String description;

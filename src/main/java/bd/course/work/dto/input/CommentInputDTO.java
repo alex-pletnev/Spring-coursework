@@ -6,6 +6,12 @@ import lombok.Data;
 
 @Data
 public class CommentInputDTO {
+    /**
+     * Identifier of the type.
+     * Usually null when creating a new record.
+     */
+    private Long id;
+
     @NotNull(message = "Quest is mandatory")
     private QuestInputDTO quest;
 

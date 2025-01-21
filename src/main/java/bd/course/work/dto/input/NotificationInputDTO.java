@@ -6,6 +6,12 @@ import lombok.Data;
 
 @Data
 public class NotificationInputDTO {
+    /**
+     * Identifier of the type.
+     * Usually null when creating a new record.
+     */
+    private Long id;
+
     @NotNull(message = "User is mandatory")
     private UserInputDTO user;
 

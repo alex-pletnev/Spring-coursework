@@ -7,6 +7,12 @@ import lombok.Data;
 
 @Data
 public class UserInputDTO {
+    /**
+     * Identifier of the type.
+     * Usually null when creating a new record.
+     */
+    private Long id;
+
     @NotBlank(message = "Username is mandatory")
     @Size(max = 100, message = "Username cannot exceed 100 characters")
     private String username;

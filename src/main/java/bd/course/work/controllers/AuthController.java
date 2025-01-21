@@ -2,7 +2,7 @@ package bd.course.work.controllers;
 
 import bd.course.work.dto.input.UserInputDTO;
 import bd.course.work.dto.output.UserOutputDTO;
-import bd.course.work.entities.User;
+import bd.course.work.exceptions.InvalidPasswordException;
 import bd.course.work.services.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -24,17 +24,16 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/reg")
-    public ResponseEntity<User> createUser(@RequestBody @Valid UserInputDTO userInputDTO) {
+    public ResponseEntity<UserOutputDTO> createUser(@RequestBody @Valid UserInputDTO userInputDTO) {
         LOGGER.info(userInputDTO);
-        User newUser = authService.createUser(userInputDTO);
-        return ResponseEntity.ok(newUser);
+        return ResponseEntity.ok(authService.createUser(userInputDTO));
     }
 
     @PostMapping
     public ResponseEntity<UserOutputDTO> authenticateUser(@RequestBody @Valid UserInputDTO userInputDTO) {
         return authService.authenticateUser(userInputDTO.getUsername(), userInputDTO.getPassword())
                 .map(ResponseEntity::ok)
-                .orElseThrow();
+                .orElseThrow(() -> new InvalidPasswordException("Invalid password"));
     }
 
 }

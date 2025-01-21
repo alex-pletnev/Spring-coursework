@@ -5,6 +5,12 @@ import lombok.Data;
 
 @Data
 public class HeroInputDTO {
+    /**
+     * Identifier of the type.
+     * Usually null when creating a new record.
+     */
+    private Long id;
+
     @NotBlank(message = "Hero name is mandatory")
     @Size(max = 255, message = "Hero name cannot exceed 255 characters")
     private String name;

@@ -8,6 +8,12 @@ import lombok.Data;
 
 @Data
 public class QuestInputDTO {
+    /**
+     * Identifier of the type.
+     * Usually null when creating a new record.
+     */
+    private Long id;
+
     @NotBlank(message = "Quest title is mandatory")
     @Size(max = 255, message = "Quest title cannot exceed 255 characters")
     private String title;

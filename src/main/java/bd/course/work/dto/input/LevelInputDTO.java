@@ -6,6 +6,12 @@ import lombok.Data;
 
 @Data
 public class LevelInputDTO {
+    /**
+     * Identifier of the type.
+     * Usually null when creating a new record.
+     */
+    private Long id;
+
     @NotNull(message = "Level value is mandatory")
     @Min(value = 1, message = "Level value must be at least 1")
     private Long value;
